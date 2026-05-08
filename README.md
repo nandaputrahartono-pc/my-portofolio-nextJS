@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎮 Nanda Putra - Pixel Portfolio
 
-## Getting Started
+Welcome to my digital playground! This is a personal portfolio website built with a **modern tech stack** and a **retro pixel-art aesthetic**. It's designed to feel like a classic RPG game interface while showcasing my professional journey, projects, and skills.
+
+![Pixel Art Banner](https://img.shields.io/badge/Style-Pixel--Art-blueviolet?style=for-the-badge)
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript)
+
+## ✨ Features
+
+- **🕹️ Retro UI/UX**: Custom-built pixel borders, buttons, and layouts using vanilla CSS shadows.
+- **✨ Smooth Animations**: Dynamic "Opening Pill" navbar and hover effects that feel alive.
+- **📱 Responsive Layout**: Fully optimized for mobile with a dedicated bottom-docked navigation bar.
+- **🌗 Theme Toggle**: Switch between Dark and Light modes with pixel-perfect icon transitions.
+- **🤖 AI Integration**: Built-in AI assistant helper (coming soon/integrated).
+- **🗺️ Interactive Journey**: Explore my experience and projects through a structured, game-like map.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) & Vanilla CSS
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Icons**: Custom Pixel SVG Icons & Emojis
+- **Fonts**: Custom Pixel Heading Fonts
+
+## 🚀 Getting Started
 
 First, run the development server:
 
 ```bash
+npm install
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 👤 About Me
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Hi! I'm **Nanda Putra**, a passionate developer who loves blending creativity with code. I specialize in building web applications that not only work perfectly but also provide a unique visual experience. This portfolio is a reflection of my love for retro aesthetics and modern performance.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📸 Screenshots
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+*(Add your screenshots here later!)*
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Hero Section**: A grand entrance with a "Level Up" feel.
+- **Navbar**: The centerpiece of the site with horizontal opening animations.
+- **Project Cards**: Retro-styled cards showcasing my latest work.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ✉️ Contact
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Feel free to reach out if you want to collaborate on a project or just say hi!
+
+- **Email**: [Your Email Here]
+- **GitHub**: [@nandaputrahartono-pc](https://github.com/nandaputrahartono-pc)
+- **LinkedIn**: [Your LinkedIn Profile]
+
+---
+
+*Built with 💖 and a lot of pixels by Nanda Putra.*
