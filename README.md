@@ -47,7 +47,7 @@ Hi! I'm **Nanda Putra**, a passionate developer who loves blending creativity wi
 
 ## 📸 Screenshots
 
-*(Add your screenshots here later!)*
+![alt text](image.png)
 
 - **Hero Section**: A grand entrance with a "Level Up" feel.
 - **Navbar**: The centerpiece of the site with horizontal opening animations.
