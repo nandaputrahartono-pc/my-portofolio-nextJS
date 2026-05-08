@@ -59,9 +59,9 @@ Hi! I'm **Nanda Putra**, a passionate developer who loves blending creativity wi
 
 Feel free to reach out if you want to collaborate on a project or just say hi!
 
-- **Email**: [Your Email Here]
+- **Email**: [nandaputrah235@gmail.com](mailto:nandaputrah235@gmail.com)
 - **GitHub**: [@nandaputrahartono-pc](https://github.com/nandaputrahartono-pc)
-- **LinkedIn**: [Your LinkedIn Profile]
+- **Instagram**: [@nanda_putra324](https://www.instagram.com/nanda_putra324/)
 
 ---
 
