@@ -85,7 +85,7 @@ export default function TechSection() {
       { threshold: 0.1 }
     );
 
-    const elements = sectionRef.current?.querySelectorAll('.reveal');
+    const elements = sectionRef.current?.querySelectorAll('.reveal, #tech-content');
     elements?.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
@@ -101,23 +101,22 @@ export default function TechSection() {
     >
       <div className="pixel-grid-bg" />
 
-      <h2 className="section-title reveal" style={{ opacity: 0 }}>
+      <h2 className="section-title animate-slideUp" >
         ⚔ Tech Arsenal
       </h2>
-      <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
+      <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
         Weapons and skills acquired on my journey
       </p>
 
       {/* Category Selector — RPG style tabs */}
       <div
-        className="reveal"
+        className="animate-slideUp"
         style={{
-          opacity: 0,
           animationDelay: '0.2s',
           display: 'flex',
           justifyContent: 'center',
-          gap: '16px',
-          marginBottom: '40px',
+          gap: '14px',
+          marginBottom: '28px',
           flexWrap: 'wrap',
         }}
       >
@@ -152,22 +151,21 @@ export default function TechSection() {
       {/* Skills Display */}
       <div
         id="tech-content"
-        className="reveal"
+        className="animate-slideUp"
         style={{
-          opacity: 0,
           animationDelay: '0.3s',
           maxWidth: '700px',
           margin: '0 auto',
         }}
       >
-        <div className="pixel-dialog" style={{ padding: '32px' }}>
+        <div className="pixel-dialog" style={{ padding: '28px' }}>
           {/* Category Header */}
           <div
             style={{
               fontFamily: 'var(--font-pixel-heading), monospace',
               fontSize: '0.7rem',
               color: currentCategory.color,
-              marginBottom: '24px',
+              marginBottom: '20px',
               textTransform: 'uppercase',
               letterSpacing: '2px',
               textAlign: 'center',
@@ -183,7 +181,7 @@ export default function TechSection() {
           </div>
 
           {/* Skill Bars */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {currentCategory.items.map((item, i) => (
               <div key={item.name}>
                 <div
@@ -237,7 +235,7 @@ export default function TechSection() {
           {/* Total XP */}
           <div
             style={{
-              marginTop: '24px',
+              marginTop: '20px',
               textAlign: 'center',
               padding: '12px',
               background: 'var(--bg-secondary)',

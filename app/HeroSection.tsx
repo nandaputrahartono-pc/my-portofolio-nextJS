@@ -36,13 +36,13 @@ const TECH_ICONS = [
 ];
 
 const LATEST_EXPERIENCE = {
-  role: 'Full Stack Developer',
-  company: 'Tech Startup Inc.',
-  period: '2024 — Present',
+  role: 'Mahasiswa IT & AI Explorer',
+  company: 'Universitas Catur Insan Cendekia',
+  period: '2025 — Sekarang',
   highlights: [
-    'Led frontend architecture with React & Next.js',
-    'Built REST & GraphQL APIs serving 10k+ users',
-    'Mentored 3 junior developers',
+    'Mempelajari dan menerapkan Next.js untuk website',
+    'Memahami konsep dasar AI & melatih model',
+    'Mengeksplorasi pembuatan aplikasi mobile dengan Flutter',
   ],
 };
 
@@ -58,7 +58,7 @@ export default function HeroSection() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.05, rootMargin: '50px' }
     );
 
     const elements = sectionRef.current?.querySelectorAll('.reveal');
@@ -104,7 +104,7 @@ export default function HeroSection() {
         ))}
 
         {/* Pixel Character */}
-        <div className="reveal" style={{ opacity: 0, marginBottom: '32px', animationDelay: '0.1s' }}>
+        <div className="animate-slideUp" style={{ marginBottom: '32px', animationDelay: '0.1s' }}>
           <div className="animate-float">
             <svg width="80" height="80" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
               <rect x="4" y="0" width="8" height="2" fill="var(--accent-secondary)" />
@@ -131,7 +131,7 @@ export default function HeroSection() {
         </div>
 
         {/* Greeting Badge */}
-        <div className="reveal" style={{ opacity: 0, animationDelay: '0.2s', marginBottom: '16px' }}>
+        <div className="animate-slideUp" style={{ animationDelay: '0.2s', marginBottom: '16px' }}>
           <span
             className="pixel-tag"
             style={{ background: 'var(--accent-tertiary)', color: '#0d1a12', padding: '6px 16px', fontSize: '0.55rem' }}
@@ -142,9 +142,8 @@ export default function HeroSection() {
 
         {/* Main Title */}
         <h1
-          className="reveal"
+          className="animate-slideUp"
           style={{
-            opacity: 0,
             animationDelay: '0.3s',
             fontFamily: 'var(--font-pixel-heading), monospace',
             fontSize: 'clamp(1.2rem, 4vw, 2.2rem)',
@@ -154,14 +153,13 @@ export default function HeroSection() {
             color: 'var(--text-primary)',
           }}
         >
-          I&apos;m <span style={{ color: 'var(--accent-primary)' }}>Nanda Putra</span>
+          I&apos;m <span style={{ color: 'var(--accent-primary)' }}>Nanda Putra Hartono</span>
         </h1>
 
         {/* Subtitle */}
         <p
-          className="reveal"
+          className="animate-slideUp"
           style={{
-            opacity: 0,
             animationDelay: '0.4s',
             fontFamily: 'var(--font-pixel-body), monospace',
             fontSize: 'clamp(0.9rem, 2vw, 1.2rem)',
@@ -172,15 +170,15 @@ export default function HeroSection() {
             marginBottom: '32px',
           }}
         >
-          A passionate Full Stack Developer crafting
+          A passionate IT Student exploring the realms of
           <br />
-          digital experiences with pixels and code ✨
+          Web, Mobile, and Artificial Intelligence ✨
         </p>
 
         {/* CTA Buttons */}
         <div
-          className="reveal"
-          style={{ opacity: 0, animationDelay: '0.5s', display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}
+          className="animate-slideUp"
+          style={{ animationDelay: '0.5s', display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}
         >
           <Link href="/projects" className="pixel-btn" style={{ textDecoration: 'none' }}>
             View Projects
@@ -192,13 +190,12 @@ export default function HeroSection() {
 
         {/* Stats Row */}
         <div
-          className="reveal"
+          className="animate-slideUp"
           style={{
-            opacity: 0,
             animationDelay: '0.6s',
             display: 'flex',
             gap: '32px',
-            marginTop: '64px',
+            marginTop: '44px',
             flexWrap: 'wrap',
             justifyContent: 'center',
           }}
@@ -231,11 +228,13 @@ export default function HeroSection() {
 
         {/* Scroll Down Indicator */}
         <div
+          className="hero-scroll-indicator"
           style={{
-            position: 'absolute',
-            bottom: '8px',
-            left: '50%',
-            transform: 'translateX(-50%)',
+            marginTop: 'clamp(28px, 6vh, 56px)',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            flexShrink: 0,
           }}
         >
           <div
@@ -259,49 +258,42 @@ export default function HeroSection() {
       {/* ===== WHAT I DO SECTION ===== */}
       <section className="section" style={{ position: 'relative' }}>
         <div className="pixel-grid-bg" />
-        <h2 className="section-title reveal" style={{ opacity: 0 }}>◈ What I Do</h2>
-        <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
-          Skills and services I bring to the party
+        <h2 className="section-title animate-slideUp">◈ What I Do</h2>
+        <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
+          Minat dan bidang yang sedang aku tekuni
         </p>
 
         <div
-          className="reveal"
+          className="animate-slideUp"
           style={{
-            opacity: 0,
             animationDelay: '0.2s',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))',
             gap: '24px',
           }}
         >
           {[
             {
               icon: '🖥️',
-              title: 'Frontend Development',
-              desc: 'Building responsive and interactive UIs with React, Next.js, and modern CSS. Pixel-perfect designs that work on every device.',
+              title: 'Web Development',
+              desc: 'Mengembangkan website yang responsif dan interaktif mulai dari Vanilla web (HTML/CSS/JS) hingga framework Laravel dan Next.js.',
               color: 'var(--accent-primary)',
             },
             {
-              icon: '⚙️',
-              title: 'Backend Development',
-              desc: 'Designing scalable APIs and server-side logic with Node.js, Laravel, and Python. Database design & optimization.',
+              icon: '📱',
+              title: 'Mobile Development',
+              desc: 'Sedang giat mengeksplorasi dan melakukan riset tentang pembuatan aplikasi mobile lintas platform menggunakan Dart dan Flutter.',
               color: 'var(--accent-info)',
             },
             {
-              icon: '🎨',
-              title: 'UI/UX Design',
-              desc: 'Creating intuitive and beautiful user experiences. From wireframes to high-fidelity prototypes with a focus on usability.',
-              color: 'var(--accent-secondary)',
-            },
-            {
               icon: '🤖',
-              title: 'AI & Automation',
-              desc: 'Integrating AI solutions — chatbots, content generation, and intelligent automation to enhance user experiences.',
+              title: 'AI Engineering',
+              desc: 'Mempelajari cara melatih model kecerdasan buatan dengan Python dan bagaimana mengintegrasikannya ke aplikasi dan website.',
               color: 'var(--accent-purple)',
             },
           ].map((service) => (
-            <div key={service.title} className="pixel-dialog" style={{ textAlign: 'center', padding: '32px 24px' }}>
-              <div style={{ fontSize: '2rem', marginBottom: '16px' }}>{service.icon}</div>
+            <div key={service.title} className="pixel-dialog service-card" style={{ textAlign: 'center', padding: '32px 24px' }}>
+              <div className="service-card-icon" style={{ fontSize: '2rem', marginBottom: '16px' }}>{service.icon}</div>
               <h3
                 style={{
                   fontFamily: 'var(--font-pixel-heading), monospace',
@@ -329,21 +321,19 @@ export default function HeroSection() {
         </div>
       </section>
 
-      {/* ===== FEATURED PROJECTS PREVIEW ===== */}
-      <section className="section" style={{ position: 'relative' }}>
-        <div className="pixel-grid-bg" />
-        <h2 className="section-title reveal" style={{ opacity: 0 }}>✦ Featured Projects</h2>
-        <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
+      {/* ===== FEATURED PROJECTS ===== */}
+      <section className="section">
+        <h2 className="section-title animate-slideUp">◈ Featured Projects</h2>
+        <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
           A sneak peek at my latest quests
         </p>
 
         <div
-          className="reveal"
+          className="animate-slideUp"
           style={{
-            opacity: 0,
             animationDelay: '0.2s',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '24px',
             marginBottom: '32px',
           }}
@@ -411,25 +401,24 @@ export default function HeroSection() {
           ))}
         </div>
 
-        <div className="reveal" style={{ opacity: 0, animationDelay: '0.3s', textAlign: 'center' }}>
+        <div className="animate-slideUp" style={{ animationDelay: '0.3s', textAlign: 'center' }}>
           <Link href="/projects" className="pixel-btn pixel-btn-secondary" style={{ textDecoration: 'none' }}>
             View All Projects →
           </Link>
         </div>
       </section>
 
-      {/* ===== TECH STACK PREVIEW ===== */}
+      {/* ===== TECH STACK ===== */}
       <section className="section" style={{ position: 'relative' }}>
         <div className="pixel-grid-bg" />
-        <h2 className="section-title reveal" style={{ opacity: 0 }}>⚔ Tech Stack</h2>
-        <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
+        <h2 className="section-title animate-slideUp">◈ Tech Arsenal</h2>
+        <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
           Tools in my arsenal
         </p>
 
         <div
-          className="reveal"
+          className="animate-slideUp"
           style={{
-            opacity: 0,
             animationDelay: '0.2s',
             display: 'flex',
             flexWrap: 'wrap',
@@ -472,25 +461,23 @@ export default function HeroSection() {
           ))}
         </div>
 
-        <div className="reveal" style={{ opacity: 0, animationDelay: '0.3s', textAlign: 'center' }}>
+        <div className="animate-slideUp" style={{ animationDelay: '0.3s', textAlign: 'center' }}>
           <Link href="/tech" className="pixel-btn pixel-btn-secondary" style={{ textDecoration: 'none' }}>
             Full Arsenal →
           </Link>
         </div>
       </section>
 
-      {/* ===== LATEST EXPERIENCE PREVIEW ===== */}
-      <section className="section" style={{ position: 'relative' }}>
-        <div className="pixel-grid-bg" />
-        <h2 className="section-title reveal" style={{ opacity: 0 }}>★ Current Quest</h2>
-        <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
-          Where I&apos;m adventuring right now
+      {/* ===== LATEST EXPERIENCE ===== */}
+      <section className="section">
+        <h2 className="section-title animate-slideUp">◈ Journey Log</h2>
+        <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
+          Petualangan terbaruku saat ini
         </p>
 
         <div
-          className="reveal"
+          className="animate-slideUp"
           style={{
-            opacity: 0,
             animationDelay: '0.2s',
             maxWidth: '700px',
             margin: '0 auto 32px',
@@ -568,7 +555,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="reveal" style={{ opacity: 0, animationDelay: '0.3s', textAlign: 'center' }}>
+        <div className="animate-slideUp" style={{ animationDelay: '0.3s', textAlign: 'center' }}>
           <Link href="/experience" className="pixel-btn pixel-btn-secondary" style={{ textDecoration: 'none' }}>
             Full Adventure Log →
           </Link>
@@ -578,7 +565,7 @@ export default function HeroSection() {
       {/* ===== CTA SECTION ===== */}
       <section className="section" style={{ position: 'relative', textAlign: 'center' }}>
         <div className="pixel-grid-bg" />
-        <div className="reveal" style={{ opacity: 0 }}>
+        <div className="animate-slideUp">
           <div className="pixel-dialog" style={{ padding: '48px 32px', maxWidth: '600px', margin: '0 auto' }}>
             <div style={{ fontSize: '2rem', marginBottom: '16px' }}>💬</div>
             <h2

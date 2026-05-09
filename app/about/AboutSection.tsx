@@ -1,31 +1,51 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 const EDUCATION = [
   {
-    school: 'Universitas Teknologi Indonesia',
+    school: 'Universitas Catur Insan Cendekia',
     degree: 'S1 — Teknik Informatika',
-    period: '2020 — 2024',
-    description: 'Focused on software engineering, algorithms, and web development. Active in coding communities and hackathons.',
+    period: '2025 — Now',
+    description: 'berfokus pada coding, AI, Pengembangan Web dan Aplikasi Mobile. Aktif dalam komunitas teknologi kampus dan proyek open source.',
     color: 'var(--accent-info)',
   },
   {
-    school: 'SMA Negeri 1',
-    degree: 'MIPA — Ilmu Pengetahuan Alam',
-    period: '2017 — 2020',
-    description: 'Discovered passion for programming and technology. Started learning web development through online courses.',
+    school: 'SMA IT Nuurusshidiiq',
+    degree: 'Kurikulum Merdeka - IPA',
+    period: '2022 — 2025',
+    description: 'Seharusnya aku masuk SMK, tetapi aku belajar mandiri dengan belajar coding dari internet, dan aku menyukai Matematika.',
     color: 'var(--accent-tertiary)',
   },
+  {
+    school: 'SMP IT Nuurusshidiiq',
+    degree: 'IPA dan IPS',
+    period: '2019 — 2022',
+    description: 'Aku menemukan passionku dalam dunia teknologi, sehingga aku tertarik untuk mendalami coding, dan rencanaku masuk SMK',
+    color: 'var(--accent-secondary)',
+  },
+  {
+    school: 'SDN 1 Jadimulya',
+    degree: 'Elementary School',
+    period: '2013 — 2019',
+    description: 'Dasar-dasar pendidikan yang membentuk fondasi pengetahuan dan keterampilan dasar.',
+    color: 'var(--accent-primary)',
+  },
+  {
+    school: 'TK Al-Huda',
+    degree: 'Kindergarten',
+    period: '2010 — 2013',
+    description: 'Awal mula pengenalan dunia pendidikan dan sosial.',
+    color: 'var(--accent-purple)',
+  }
 ];
 
 const HOBBIES = [
-  { icon: '🎮', name: 'Gaming', desc: 'RPGs, strategy, and indie games' },
-  { icon: '📚', name: 'Reading', desc: 'Tech blogs & sci-fi novels' },
-  { icon: '🎵', name: 'Music', desc: 'Lo-fi, chiptune, & ambient' },
-  { icon: '☕', name: 'Coffee', desc: 'Fuel for coding sessions' },
-  { icon: '🌏', name: 'Traveling', desc: 'Exploring new places' },
-  { icon: '🎬', name: 'Movies', desc: 'Sci-fi & thriller' },
+  { icon: '🎮', name: 'Gaming', desc: 'hack & slash, rpg, story games' },
+  { icon: '📚', name: 'Reading', desc: 'Light novels & tech books' },
+  { icon: '🎵', name: 'Music', desc: 'Jpop, Jrock, & Yorushika' },
+  { icon: '🎬', name: 'Movies', desc: 'Sci-fi & action' },
 ];
 
 const FUN_FACTS = [
@@ -49,16 +69,45 @@ export default function AboutSection() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-slideUp');
+            if (entry.target.classList.contains('education-timeline')) {
+              entry.target.classList.add('education-timeline-active');
+            } else if (entry.target.classList.contains('education-timeline-item')) {
+              entry.target.classList.add('education-item-active');
+            } else {
+              entry.target.classList.add('animate-slideUp');
+            }
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    const elements = sectionRef.current?.querySelectorAll('.reveal');
+    const elements = sectionRef.current?.querySelectorAll('.reveal, .education-timeline, .education-timeline-item');
     elements?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+
+    const timeline = sectionRef.current?.querySelector('.education-timeline') as HTMLElement | null;
+
+    const handleScroll = () => {
+      if (!timeline) return;
+      const rect = timeline.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Start drawing when the top of the timeline reaches 75% of the viewport height
+      const startDrawPos = windowHeight * 0.75;
+
+      let progress = (startDrawPos - rect.top) / rect.height;
+      progress = Math.max(0, Math.min(1, progress));
+
+      timeline.style.setProperty('--timeline-progress', progress.toString());
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
@@ -67,14 +116,14 @@ export default function AboutSection() {
       <section id="about" className="section" style={{ position: 'relative', minHeight: 'calc(100vh - 120px)' }}>
         <div className="pixel-grid-bg" />
 
-        <h2 className="section-title reveal" style={{ opacity: 0 }}>☺ About Me</h2>
-        <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
+        <h2 className="section-title animate-slideUp" >☺ About Me</h2>
+        <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
           Get to know the person behind the pixels
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 2fr)', gap: '40px', alignItems: 'start' }} className="about-grid">
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 2fr)', gap: '32px', alignItems: 'start' }} className="about-grid">
           {/* Pixel Avatar */}
-          <div className="reveal" style={{ opacity: 0, animationDelay: '0.2s' }}>
+          <div className="animate-slideUp" style={{ animationDelay: '0.2s' }}>
             <div
               style={{
                 width: '100%',
@@ -98,29 +147,14 @@ export default function AboutSection() {
                 transition: 'background 0.3s',
               }}
             >
-              <svg width="160" height="160" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
-                <rect x="5" y="0" width="6" height="1" fill="var(--accent-primary)" />
-                <rect x="3" y="1" width="10" height="2" fill="var(--accent-primary)" />
-                <rect x="4" y="2" width="8" height="2" fill="var(--accent-secondary)" />
-                <rect x="4" y="4" width="8" height="5" fill="#ffcc99" />
-                <rect x="3" y="5" width="1" height="3" fill="#ffcc99" />
-                <rect x="12" y="5" width="1" height="3" fill="#ffcc99" />
-                <rect x="5" y="5" width="2" height="2" fill="var(--border-color)" />
-                <rect x="9" y="5" width="2" height="2" fill="var(--border-color)" />
-                <rect x="6" y="5" width="1" height="1" fill="#fff" />
-                <rect x="10" y="5" width="1" height="1" fill="#fff" />
-                <rect x="6" y="8" width="1" height="1" fill="var(--accent-primary)" />
-                <rect x="7" y="8" width="2" height="1" fill="var(--accent-primary)" />
-                <rect x="9" y="8" width="1" height="1" fill="var(--accent-primary)" />
-                <rect x="4" y="9" width="8" height="4" fill="var(--accent-info)" />
-                <rect x="6" y="9" width="4" height="1" fill="var(--accent-secondary)" />
-                <rect x="2" y="10" width="2" height="3" fill="#ffcc99" />
-                <rect x="12" y="10" width="2" height="3" fill="#ffcc99" />
-                <rect x="5" y="13" width="2" height="2" fill="var(--accent-secondary)" />
-                <rect x="9" y="13" width="2" height="2" fill="var(--accent-secondary)" />
-                <rect x="4" y="15" width="3" height="1" fill="var(--border-color)" />
-                <rect x="9" y="15" width="3" height="1" fill="var(--border-color)" />
-              </svg>
+              <Image
+                src="/profile.webp"
+                alt="Nanda Putra Profile Photo"
+                width={240}
+                height={240}
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                priority
+              />
               <div style={{ position: 'absolute', top: '8px', left: '8px', width: '8px', height: '8px', borderTop: '3px solid var(--accent-primary)', borderLeft: '3px solid var(--accent-primary)' }} />
               <div style={{ position: 'absolute', top: '8px', right: '8px', width: '8px', height: '8px', borderTop: '3px solid var(--accent-primary)', borderRight: '3px solid var(--accent-primary)' }} />
               <div style={{ position: 'absolute', bottom: '8px', left: '8px', width: '8px', height: '8px', borderBottom: '3px solid var(--accent-primary)', borderLeft: '3px solid var(--accent-primary)' }} />
@@ -136,17 +170,17 @@ export default function AboutSection() {
                 Player Card
               </div>
               <div style={{ fontFamily: 'var(--font-pixel-heading), monospace', fontSize: '0.6rem', color: 'var(--text-primary)', marginBottom: '4px' }}>
-                Nanda Putra
+                Nanda Putra Hartono
               </div>
               <div style={{ fontFamily: 'var(--font-pixel-body), monospace', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                Full Stack Developer
+                Full Stack Developer, AI Enginer
               </div>
               <div style={{ fontFamily: 'var(--font-pixel-body), monospace', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                📍 Indonesia
+                📍Indonesia
               </div>
               <div style={{ marginTop: '12px', display: 'flex', justifyContent: 'center', gap: '8px' }}>
                 <span className="pixel-tag" style={{ background: 'var(--accent-tertiary)', color: '#fff', padding: '3px 8px' }}>
-                  LVL 24
+                  LVL 5
                 </span>
                 <span className="pixel-tag" style={{ background: 'var(--accent-info)', color: '#fff', padding: '3px 8px' }}>
                   CLASS: DEV
@@ -157,23 +191,22 @@ export default function AboutSection() {
 
           {/* Bio Content */}
           <div>
-            <div className="pixel-dialog reveal" style={{ opacity: 0, animationDelay: '0.3s', marginBottom: '24px' }}>
+            <div className="pixel-dialog animate-slideUp" style={{ animationDelay: '0.3s', marginBottom: '24px' }}>
               <div style={{ fontFamily: 'var(--font-pixel-heading), monospace', fontSize: '0.6rem', color: 'var(--accent-primary)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '2px' }}>
                 ▸ Player Bio
               </div>
               <p style={{ fontFamily: 'var(--font-pixel-body), monospace', fontSize: '0.95rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                Hello! I&apos;m Nanda Putra, a Full Stack Developer from Indonesia. I started
-                my coding journey back in high school when I built my first website, and
-                I&apos;ve been hooked ever since.
+                Halo! Aku Nanda Putra Hartono, Seorang Web Developer, Mobile Developer, dan AI Engineer. Aku sudah memiliki minat pada saat saya SMP
+                dan belajar secara otodidak pada saat SMA, hingga sekarang. Di Universitas Catur Insan Cendikia juga, aku sudah belajar mendalami AI
+                dan aku juga aktif dalam komunitas teknologi kampus serta proyek open source.
               </p>
               <p style={{ fontFamily: 'var(--font-pixel-body), monospace', fontSize: '0.95rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                I specialize in building modern web applications using React, Next.js, and
-                Laravel. I love turning complex problems into simple, beautiful solutions
-                and I&apos;m always eager to learn new technologies.
+                Aku mengembangkan website dengan menggunakan Vanilla HTML/CSS/JS dan Framework Next JS dan Laravel.
+                Untuk aplikasi mobile, aku menngunakan bahahsa Dart dengan framework Flutter. 
+                Sedangkan untuk AI, aku menggunakan Python untuk membangun model AI.
               </p>
               <p style={{ fontFamily: 'var(--font-pixel-body), monospace', fontSize: '0.95rem', lineHeight: '1.8', color: 'var(--text-secondary)' }}>
-                When I&apos;m not coding, you&apos;ll find me gaming, exploring new tech,
-                or brewing the perfect cup of coffee. ☕
+                Selain aku mengoding, aku mengisi waktu luangku dengan bermain game, mendengarkan musik, membaca buku, dan menonton film. Aku percaya bahwa keseimbangan antara kerja keras dan hiburan adalah kunci untuk tetap kreatif dan termotivasi.
               </p>
               <span
                 style={{
@@ -190,12 +223,11 @@ export default function AboutSection() {
 
             {/* Quick Info Cards */}
             <div
-              className="reveal"
+              className="animate-slideUp"
               style={{
-                opacity: 0,
                 animationDelay: '0.4s',
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))',
                 gap: '12px',
               }}
             >
@@ -225,28 +257,29 @@ export default function AboutSection() {
       {/* ===== EDUCATION TIMELINE ===== */}
       <section className="section" style={{ position: 'relative' }}>
         <div className="pixel-grid-bg" />
-        <h2 className="section-title reveal" style={{ opacity: 0 }}>🎓 Education</h2>
-        <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
+        <h2 className="section-title animate-slideUp" >🎓 Education</h2>
+        <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
           Where I leveled up my knowledge
         </p>
 
-        <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+        <div className="education-timeline" style={{ maxWidth: '700px', margin: '0 auto' }}>
           {EDUCATION.map((edu, i) => (
             <div
               key={i}
-              className="reveal"
+              className="education-timeline-item"
               style={{
-                opacity: 0,
                 animationDelay: `${0.2 + i * 0.15}s`,
+                '--timeline-delay': `${i * 0.18}s`,
                 display: 'flex',
-                gap: '24px',
+                gap: '16px',
                 marginBottom: '24px',
                 position: 'relative',
-              }}
+              } as React.CSSProperties}
             >
               {/* Timeline Dot */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: '32px', paddingTop: '20px' }}>
                 <div
+                  className="education-timeline-dot"
                   style={{
                     width: '16px',
                     height: '16px',
@@ -254,13 +287,10 @@ export default function AboutSection() {
                     boxShadow: `3px 0 0 0 var(--border-color), -3px 0 0 0 var(--border-color), 0 3px 0 0 var(--border-color), 0 -3px 0 0 var(--border-color)`,
                   }}
                 />
-                {i < EDUCATION.length - 1 && (
-                  <div style={{ width: '4px', flex: 1, background: 'var(--border-color)', marginTop: '8px' }} />
-                )}
               </div>
 
               {/* Content */}
-              <div className="pixel-dialog" style={{ flex: 1, padding: '24px' }}>
+              <div className="pixel-dialog education-timeline-card" style={{ flex: 1, padding: '20px', minWidth: 0 }}>
                 <span className="pixel-tag" style={{ background: edu.color, color: '#fff', padding: '4px 12px', marginBottom: '12px', display: 'inline-block' }}>
                   {edu.period}
                 </span>
@@ -282,12 +312,12 @@ export default function AboutSection() {
       {/* ===== LANGUAGES ===== */}
       <section className="section" style={{ position: 'relative' }}>
         <div className="pixel-grid-bg" />
-        <h2 className="section-title reveal" style={{ opacity: 0 }}>🌐 Languages</h2>
-        <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
+        <h2 className="section-title animate-slideUp" >🌐 Languages</h2>
+        <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
           Communication skills unlocked
         </p>
 
-        <div className="reveal" style={{ opacity: 0, animationDelay: '0.2s', maxWidth: '500px', margin: '0 auto' }}>
+        <div className="animate-slideUp" style={{ animationDelay: '0.2s', maxWidth: '500px', margin: '0 auto' }}>
           <div className="pixel-dialog" style={{ padding: '28px' }}>
             {LANGUAGES.map((lang) => (
               <div key={lang.name} style={{ marginBottom: '20px' }}>
@@ -311,18 +341,17 @@ export default function AboutSection() {
       {/* ===== HOBBIES ===== */}
       <section className="section" style={{ position: 'relative' }}>
         <div className="pixel-grid-bg" />
-        <h2 className="section-title reveal" style={{ opacity: 0 }}>🎮 Hobbies & Interests</h2>
-        <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
+        <h2 className="section-title animate-slideUp" >🎮 Hobbies & Interests</h2>
+        <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
           What I do when I&apos;m AFK
         </p>
 
         <div
-          className="reveal"
+          className="animate-slideUp"
           style={{
-            opacity: 0,
             animationDelay: '0.2s',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 160px), 1fr))',
             gap: '16px',
             maxWidth: '700px',
             margin: '0 auto',
@@ -345,15 +374,14 @@ export default function AboutSection() {
       {/* ===== FUN FACTS ===== */}
       <section className="section" style={{ position: 'relative' }}>
         <div className="pixel-grid-bg" />
-        <h2 className="section-title reveal" style={{ opacity: 0 }}>🏆 Fun Facts</h2>
-        <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
+        <h2 className="section-title animate-slideUp" >🏆 Fun Facts</h2>
+        <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
           Player statistics & achievements
         </p>
 
         <div
-          className="reveal"
+          className="animate-slideUp"
           style={{
-            opacity: 0,
             animationDelay: '0.2s',
             display: 'flex',
             flexWrap: 'wrap',

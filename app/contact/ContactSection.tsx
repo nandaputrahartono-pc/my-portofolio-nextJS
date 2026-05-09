@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 const SOCIAL_LINKS = [
   {
     name: 'GitHub',
-    url: 'https://github.com',
+    url: 'https://github.com/nandaputrahartono-pc',
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
         <rect x="4" y="0" width="8" height="2" fill="currentColor" />
@@ -41,7 +41,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: 'Email',
-    url: 'mailto:hello@example.com',
+    url: 'mailto:nandaputrah235@gmail.com',
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
         <rect x="0" y="2" width="16" height="12" fill="currentColor" />
@@ -57,18 +57,19 @@ const SOCIAL_LINKS = [
     ),
   },
   {
-    name: 'Twitter',
-    url: 'https://twitter.com',
+    name: 'Instagram',
+    url: 'https://www.instagram.com/nanda_putra324?igsh=MWQ3NWNsazVnbjl6ZQ==',
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" style={{ imageRendering: 'pixelated' }}>
-        <rect x="2" y="2" width="8" height="2" fill="currentColor" />
-        <rect x="0" y="4" width="2" height="4" fill="currentColor" />
-        <rect x="10" y="2" width="2" height="4" fill="currentColor" />
-        <rect x="2" y="8" width="8" height="2" fill="currentColor" />
-        <rect x="4" y="4" width="4" height="4" fill="currentColor" />
-        <rect x="8" y="10" width="4" height="2" fill="currentColor" />
-        <rect x="10" y="12" width="4" height="2" fill="currentColor" />
-        <rect x="12" y="10" width="2" height="2" fill="currentColor" />
+        <rect x="2" y="1" width="12" height="2" fill="currentColor" />
+        <rect x="2" y="13" width="12" height="2" fill="currentColor" />
+        <rect x="1" y="2" width="2" height="12" fill="currentColor" />
+        <rect x="13" y="2" width="2" height="12" fill="currentColor" />
+        <rect x="5" y="4" width="6" height="2" fill="currentColor" />
+        <rect x="5" y="10" width="6" height="2" fill="currentColor" />
+        <rect x="4" y="5" width="2" height="6" fill="currentColor" />
+        <rect x="10" y="5" width="2" height="6" fill="currentColor" />
+        <rect x="11" y="3" width="2" height="2" fill="currentColor" />
       </svg>
     ),
   },
@@ -112,10 +113,10 @@ export default function ContactSection() {
     >
       <div className="pixel-grid-bg" />
 
-      <h2 className="section-title reveal" style={{ opacity: 0 }}>
+      <h2 className="section-title animate-slideUp" >
         ✉ Contact
       </h2>
-      <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
+      <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
         Send a message to the quest board
       </p>
 
@@ -130,7 +131,7 @@ export default function ContactSection() {
         className="contact-grid"
       >
         {/* Contact Form */}
-        <div className="reveal" style={{ opacity: 0, animationDelay: '0.2s' }}>
+        <div className="animate-slideUp" style={{ animationDelay: '0.2s' }}>
           <div className="pixel-dialog" style={{ padding: '32px' }}>
             <div
               style={{
@@ -254,7 +255,7 @@ export default function ContactSection() {
         </div>
 
         {/* Contact Info & Social */}
-        <div className="reveal" style={{ opacity: 0, animationDelay: '0.3s' }}>
+        <div className="animate-slideUp" style={{ animationDelay: '0.3s' }}>
           {/* Info Card */}
           <div className="pixel-dialog" style={{ padding: '32px', marginBottom: '24px' }}>
             <div
@@ -272,7 +273,7 @@ export default function ContactSection() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {[
-                { label: 'Email', value: 'hello@nandaputra.dev', icon: '✉' },
+                { label: 'Email', value: 'nandaputrah235@gmail.com', icon: '✉' },
                 { label: 'Location', value: 'Indonesia 🇮🇩', icon: '📍' },
                 { label: 'Availability', value: 'Open for opportunities', icon: '🟢' },
               ].map((info) => (
@@ -377,43 +378,7 @@ export default function ContactSection() {
         </div>
       </div>
 
-      {/* Footer */}
-      <div
-        className="reveal"
-        style={{
-          opacity: 0,
-          animationDelay: '0.4s',
-          marginTop: '64px',
-          textAlign: 'center',
-          paddingTop: '32px',
-          borderTop: '3px solid var(--border-light)',
-        }}
-      >
-        <div
-          style={{
-            fontFamily: 'var(--font-pixel-heading), monospace',
-            fontSize: '0.45rem',
-            color: 'var(--text-muted)',
-            textTransform: 'uppercase',
-            letterSpacing: '2px',
-          }}
-        >
-          © 2026 Nanda Putra — Crafted with pixels & ❤️
-        </div>
-        <div
-          style={{
-            fontFamily: 'var(--font-pixel-heading), monospace',
-            fontSize: '0.35rem',
-            color: 'var(--text-muted)',
-            marginTop: '8px',
-            textTransform: 'uppercase',
-            letterSpacing: '1px',
-            opacity: 0.6,
-          }}
-        >
-          Built with Next.js + Pixel Art ✨
-        </div>
-      </div>
+
 
       <style>{`
         @media (max-width: 768px) {

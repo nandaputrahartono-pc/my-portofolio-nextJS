@@ -4,66 +4,49 @@ import { useEffect, useRef } from 'react';
 
 const EXPERIENCES = [
   {
-    role: 'Full Stack Developer',
-    company: 'Tech Startup Inc.',
-    period: '2024 — Present',
-    type: 'Full-time',
+    role: 'Mahasiswa IT & AI Explorer',
+    company: 'Universitas Catur Insan Cendekia',
+    period: '2025 — Sekarang',
+    type: 'Pendidikan & Eksplorasi',
     description:
-      'Building and maintaining scalable web applications using modern tech stack. Leading frontend architecture decisions, implementing CI/CD pipelines, and mentoring junior developers.',
+      'Mendalami kecerdasan buatan (AI) secara komprehensif. Mulai dari pemahaman dasar konsep AI, cara melatih model AI, hingga mengintegrasikan AI ke dalam aplikasi dan website modern. Secara bersamaan juga terus meningkatkan skill web development dan mengeksplorasi pembuatan aplikasi.',
     achievements: [
-      'Led migration from CRA to Next.js, improving load times by 60%',
-      'Built real-time dashboard serving 10,000+ daily users',
-      'Mentored 3 junior developers into mid-level roles',
-      'Implemented automated testing, achieving 85% code coverage',
+      'Mempelajari dan menerapkan framework Next.js untuk project website modern',
+      'Memahami konsep dasar AI dan cara melatih model kecerdasan buatan',
+      'Melakukan eksplorasi integrasi AI ke dalam aplikasi dan web',
+      'Mulai melakukan riset (research) dan belajar tentang Mobile Development',
     ],
-    skills: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Docker', 'AWS'],
+    skills: ['Next.js', 'AI Integration', 'Python', 'Mobile Dev (Learning)'],
     color: 'var(--accent-primary)',
   },
   {
-    role: 'Frontend Developer',
-    company: 'Digital Agency Co.',
-    period: '2023 — 2024',
-    type: 'Full-time',
+    role: 'Web Development Enthusiast',
+    company: 'Belajar Otodidak (SMA)',
+    period: '2022 — 2025',
+    type: 'Self-Taught',
     description:
-      'Developed responsive and interactive user interfaces for diverse client projects across e-commerce, healthcare, and education sectors.',
+      'Memulai perjalanan di dunia pemrograman secara mandiri dari internet. Membangun fondasi yang kuat di bidang web development sebelum akhirnya berfokus pada teknologi yang lebih modern.',
     achievements: [
-      'Delivered 12+ client projects on time and within budget',
-      'Improved web performance scores from 45 to 92 on Lighthouse',
-      'Created reusable component library used across all projects',
-      'Reduced development time by 30% through workflow automation',
+      'Menguasai fundamental web menggunakan HTML, CSS, dan JavaScript (Vanilla)',
+      'Mempelajari dan menggunakan framework Laravel untuk membangun website dinamis',
+      'Membangun berbagai project-project kecil untuk melatih logika pemrograman',
     ],
-    skills: ['React', 'TypeScript', 'Tailwind CSS', 'REST API', 'Figma'],
+    skills: ['HTML/CSS', 'JavaScript', 'PHP', 'Laravel'],
     color: 'var(--accent-info)',
-  },
-  {
-    role: 'Freelance Developer',
-    company: 'Self-Employed',
-    period: '2022 — 2023',
-    type: 'Freelance',
-    description:
-      'Took on diverse client projects ranging from landing pages to full web applications. Built a strong foundation in web technologies and client communication.',
-    achievements: [
-      'Completed 20+ freelance projects with 5-star ratings',
-      'Built e-commerce stores generating $50K+ in monthly revenue',
-      'Developed custom CMS solutions for small businesses',
-      'Maintained 100% client satisfaction rate',
-    ],
-    skills: ['HTML/CSS', 'JavaScript', 'PHP', 'Laravel', 'MySQL', 'WordPress'],
-    color: 'var(--accent-tertiary)',
   },
 ];
 
 const CERTIFICATIONS = [
-  { name: 'AWS Cloud Practitioner', issuer: 'Amazon Web Services', year: '2024', color: 'var(--accent-secondary)' },
-  { name: 'Meta Frontend Developer', issuer: 'Meta / Coursera', year: '2023', color: 'var(--accent-info)' },
-  { name: 'Google IT Support', issuer: 'Google / Coursera', year: '2022', color: 'var(--accent-tertiary)' },
+  { name: 'Medali Emas Olimpiade Matematika', issuer: 'Kompetisi Nasional / Daerah', year: 'SMA', color: 'var(--accent-secondary)' },
+  { name: 'Juara 3 Lomba Cerdas Cermat', issuer: 'Kompetisi Antar Sekolah', year: 'SMA', color: 'var(--accent-info)' },
+  { name: 'Dasar Pemrograman Web', issuer: 'Dicoding / Kursus Online', year: '2023', color: 'var(--accent-tertiary)' },
 ];
 
 const CAREER_STATS = [
-  { value: '2+', label: 'Years Experience', icon: '⏰' },
-  { value: '30+', label: 'Projects Delivered', icon: '📦' },
-  { value: '15+', label: 'Happy Clients', icon: '😊' },
-  { value: '3', label: 'Certifications', icon: '🏅' },
+  { value: '3+', label: 'Tahun Belajar Coding', icon: '⏰' },
+  { value: '10+', label: 'Project Latihan', icon: '📦' },
+  { value: 'Pemula', label: 'Tingkat Saat Ini', icon: '🌱' },
+  { value: 'AI', label: 'Fokus Eksplorasi', icon: '🧠' },
 ];
 
 export default function ExperienceSection() {
@@ -92,22 +75,21 @@ export default function ExperienceSection() {
       <section id="experience" className="section" style={{ position: 'relative', minHeight: 'calc(100vh - 120px)' }}>
         <div className="pixel-grid-bg" />
 
-        <h2 className="section-title reveal" style={{ opacity: 0 }}>★ Experience</h2>
-        <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
-          My adventure log through the tech realm
+        <h2 className="section-title animate-slideUp" >★ Pengalaman Belajar</h2>
+        <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
+          Jejak perjalananku mengeksplorasi dunia teknologi
         </p>
 
         {/* Career Stats */}
         <div
-          className="reveal"
+          className="animate-slideUp"
           style={{
-            opacity: 0,
             animationDelay: '0.15s',
             display: 'flex',
             flexWrap: 'wrap',
             gap: '16px',
             justifyContent: 'center',
-            marginBottom: '48px',
+            marginBottom: '32px',
           }}
         >
           {CAREER_STATS.map((stat) => (
@@ -142,12 +124,11 @@ export default function ExperienceSection() {
             {EXPERIENCES.map((exp, i) => (
               <div
                 key={i}
-                className="reveal"
+                className="animate-slideUp"
                 style={{
-                  opacity: 0,
                   animationDelay: `${0.2 + i * 0.15}s`,
                   display: 'flex',
-                  gap: '32px',
+                  gap: '16px',
                   position: 'relative',
                 }}
               >
@@ -174,7 +155,7 @@ export default function ExperienceSection() {
                 </div>
 
                 {/* Experience Card */}
-                <div className="pixel-dialog" style={{ flex: 1, padding: '24px' }}>
+                <div className="pixel-dialog" style={{ flex: 1, padding: '20px', minWidth: 0 }}>
                   {/* Badges */}
                   <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', flexWrap: 'wrap' }}>
                     <span className="pixel-tag" style={{ background: exp.color, color: '#fff', padding: '4px 12px' }}>
@@ -201,7 +182,7 @@ export default function ExperienceSection() {
                   {/* Achievements */}
                   <div style={{ marginBottom: '16px' }}>
                     <div style={{ fontFamily: 'var(--font-pixel-heading), monospace', fontSize: '0.45rem', color: 'var(--accent-secondary)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px' }}>
-                      ▸ Key Achievements
+                      ▸ Pencapaian & Fokus Belajar
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                       {exp.achievements.map((achievement, ai) => (
@@ -242,18 +223,17 @@ export default function ExperienceSection() {
       {/* ===== CERTIFICATIONS ===== */}
       <section className="section" style={{ position: 'relative' }}>
         <div className="pixel-grid-bg" />
-        <h2 className="section-title reveal" style={{ opacity: 0 }}>🏅 Certifications</h2>
-        <p className="section-subtitle reveal" style={{ opacity: 0, animationDelay: '0.1s' }}>
-          Badges earned along the way
+        <h2 className="section-title animate-slideUp" >🏅 Sertifikasi & Pembelajaran</h2>
+        <p className="section-subtitle animate-slideUp" style={{ animationDelay: '0.1s' }}>
+          Lencana yang didapatkan selama belajar
         </p>
 
         <div
-          className="reveal"
+          className="animate-slideUp"
           style={{
-            opacity: 0,
             animationDelay: '0.2s',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))',
             gap: '20px',
             maxWidth: '800px',
             margin: '0 auto',

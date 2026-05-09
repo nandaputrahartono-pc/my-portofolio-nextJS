@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Press_Start_2P, VT323 } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "./components/ThemeProvider";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const pressStart2P = Press_Start_2P({
   weight: "400",
@@ -24,6 +25,13 @@ export const metadata: Metadata = {
     "Welcome to my pixel art portfolio! I'm a passionate developer crafting digital experiences with pixels and code.",
   keywords: ["developer", "portfolio", "pixel art", "web developer", "frontend", "fullstack"],
   authors: [{ name: "Nanda Putra" }],
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
@@ -55,6 +63,7 @@ export default function RootLayout({
           <main style={{ paddingTop: '100px', flex: 1 }}>
             {children}
           </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

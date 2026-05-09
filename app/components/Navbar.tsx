@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from './ThemeProvider';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Home' },
@@ -118,30 +118,129 @@ export default function Navbar() {
   const [aiHover, setAiHover] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isTop, setIsTop] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const lastScrollY = useRef(0);
+  const lastTouchY = useRef<number | null>(null);
+  const lastPointerY = useRef<number | null>(null);
+  const ticking = useRef(false);
+  const visibilityRef = useRef(true);
+  const topRef = useRef(true);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-      if (y < 50) { setIsTop(true); setIsVisible(true); }
-      else {
-        setIsTop(false);
-        if (y < lastScrollY) setIsVisible(true);
-        else if (y > lastScrollY) setIsVisible(false);
-      }
-      setLastScrollY(y);
+    const setTopState = (next: boolean) => {
+      if (topRef.current === next) return;
+      topRef.current = next;
+      setIsTop(next);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+
+    const setVisibleState = (next: boolean) => {
+      if (visibilityRef.current === next) return;
+      visibilityRef.current = next;
+      setIsVisible(next);
+    };
+
+    const getScrollY = () => {
+      const scrollingElement = document.scrollingElement || document.documentElement;
+      return Math.max(
+        window.scrollY || 0,
+        scrollingElement.scrollTop || 0,
+        document.documentElement.scrollTop || 0,
+        document.body.scrollTop || 0
+      );
+    };
+
+    const updateNavbar = (y = getScrollY()) => {
+      const delta = y - lastScrollY.current;
+      setTopState(y < 50);
+
+      if (y <= 4) {
+        setVisibleState(true);
+        lastScrollY.current = y;
+        return;
+      }
+
+      if (Math.abs(delta) >= 4) {
+        setVisibleState(delta < 0);
+        lastScrollY.current = y;
+      }
+    };
+
+    const applyGestureDirection = (currentY: number, previousY: number) => {
+      const gestureDelta = previousY - currentY;
+      if (Math.abs(gestureDelta) < 8) return;
+
+      const y = getScrollY();
+      setTopState(y < 50 && gestureDelta < 0);
+      setVisibleState(gestureDelta < 0);
+      lastScrollY.current = y;
+    };
+
+    const handleScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      window.requestAnimationFrame(() => {
+        updateNavbar();
+        ticking.current = false;
+      });
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+      lastTouchY.current = event.touches[0]?.clientY ?? null;
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      const currentTouchY = event.touches[0]?.clientY;
+      if (currentTouchY == null || lastTouchY.current == null) return;
+
+      applyGestureDirection(currentTouchY, lastTouchY.current);
+      lastTouchY.current = currentTouchY;
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (event.pointerType !== 'touch') return;
+      lastPointerY.current = event.clientY;
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      if (event.pointerType !== 'touch' || lastPointerY.current == null) return;
+      applyGestureDirection(event.clientY, lastPointerY.current);
+      lastPointerY.current = event.clientY;
+    };
+
+    const handlePointerUp = () => {
+      lastPointerY.current = null;
+    };
+
+    const scrollOptions: AddEventListenerOptions = { passive: true };
+    const documentScrollOptions: AddEventListenerOptions = { passive: true, capture: true };
+    const viewport = window.visualViewport;
+
+    lastScrollY.current = getScrollY();
+    updateNavbar(lastScrollY.current);
+
+    window.addEventListener('scroll', handleScroll, scrollOptions);
+    window.addEventListener('touchstart', handleTouchStart, scrollOptions);
+    window.addEventListener('touchmove', handleTouchMove, scrollOptions);
+    window.addEventListener('pointerdown', handlePointerDown, scrollOptions);
+    window.addEventListener('pointermove', handlePointerMove, scrollOptions);
+    window.addEventListener('pointerup', handlePointerUp, scrollOptions);
+    window.addEventListener('pointercancel', handlePointerUp, scrollOptions);
+    document.addEventListener('scroll', handleScroll, documentScrollOptions);
+    viewport?.addEventListener('scroll', handleScroll, scrollOptions);
+    viewport?.addEventListener('resize', handleScroll, scrollOptions);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll, scrollOptions);
+      window.removeEventListener('touchstart', handleTouchStart, scrollOptions);
+      window.removeEventListener('touchmove', handleTouchMove, scrollOptions);
+      window.removeEventListener('pointerdown', handlePointerDown, scrollOptions);
+      window.removeEventListener('pointermove', handlePointerMove, scrollOptions);
+      window.removeEventListener('pointerup', handlePointerUp, scrollOptions);
+      window.removeEventListener('pointercancel', handlePointerUp, scrollOptions);
+      document.removeEventListener('scroll', handleScroll, documentScrollOptions);
+      viewport?.removeEventListener('scroll', handleScroll, scrollOptions);
+      viewport?.removeEventListener('resize', handleScroll, scrollOptions);
+    };
+  }, []);
 
   // Top bar — Logo left, Theme+AI right
   const topBar = (
@@ -250,15 +349,14 @@ export default function Navbar() {
         className="nav-pill-wrapper"
         style={{
           position: 'fixed',
-          ...(isMobile
-            ? { bottom: '24px', left: '50%', transform: `translateX(-50%) translateY(${isVisible ? '0' : '120px'})` }
-            : { top: '28px', left: '50%', transform: `translateX(-50%) translateY(${isVisible ? '0' : '-120px'})` }
-          ),
+          left: '50%',
           zIndex: 101,
           opacity: isVisible ? 1 : 0,
           pointerEvents: isVisible ? 'auto' : 'none',
           transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-        }}
+          '--nav-translate-desktop': isVisible ? '0px' : '-120px',
+          '--nav-translate-mobile': isVisible ? '0px' : '120px',
+        } as React.CSSProperties}
       >
         <div className="nav-pill" style={{
           display: 'flex', alignItems: 'center',
@@ -321,20 +419,32 @@ export default function Navbar() {
           to { opacity: 1; transform: translateY(0); }
         }
 
+        .nav-pill-wrapper {
+          top: 28px;
+          bottom: auto;
+          transform: translateX(-50%) translateY(var(--nav-translate-desktop));
+        }
+
         .nav-pill { max-width: 900px; }
 
         @media (max-width: 1024px) {
           .nav-logo-text { display: none !important; }
           .ai-text { display: none !important; }
-        }
-
-        @media (max-width: 768px) {
           .nav-pill-wrapper {
-            width: auto !important;
-            max-width: calc(100% - 48px) !important;
+            width: calc(100% - 32px) !important;
+            max-width: 400px !important;
+            top: auto !important;
+            bottom: 24px !important;
+            transform: translateX(-50%) translateY(var(--nav-translate-mobile)) !important;
+          }
+          .nav-pill {
+            width: 100% !important;
+            justify-content: space-between !important;
           }
           .nav-link-item {
-            padding: 12px 12px !important;
+            padding: 12px 0px !important;
+            flex: 1;
+            justify-content: center;
           }
           .nav-link-label {
             display: none !important;
